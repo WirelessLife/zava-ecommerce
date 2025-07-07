@@ -94,8 +94,111 @@ src/
 
 ## Customization
 
-### Adding Products
-This demo includes sample product data in `src/data/products.ts`. To add or modify products, edit this file ensuring each product follows the `Product` interface defined in `src/types/index.ts`.
+### Customizing Products
+
+This demo includes sample product data in `src/data/products.ts`. You can easily add, modify, or remove products by editing this file. Each product must follow the `Product` interface defined in `src/types/index.ts`.
+
+#### Product Structure
+
+Each product object has the following properties:
+
+```typescript
+{
+  id: number;           // Unique identifier (must be unique across all products)
+  name: string;         // Product display name
+  price: number;        // Price in dollars (e.g., 29.99)
+  image: string;        // Product image URL (preferably 500x500px)
+  description: string;  // Detailed product description
+  category: string;     // Category name (must match available categories)
+  rating: number;       // Product rating (1.0 to 5.0)
+  reviews: number;      // Number of customer reviews
+  inStock: boolean;     // Product availability status
+}
+```
+
+#### Adding a New Product
+
+1. Open `src/data/products.ts`
+2. Add a new product object to the `products` array:
+
+```typescript
+{
+  id: 11, // Use the next available ID
+  name: "New Product Name",
+  price: 49.99,
+  image: "https://images.unsplash.com/your-image-url?w=500&h=500&fit=crop",
+  description: "Detailed description of your new product features and benefits.",
+  category: "Electronics", // Must match an existing category
+  rating: 4.5,
+  reviews: 25,
+  inStock: true
+}
+```
+
+3. Save the file and restart the development server (`npm run dev`)
+
+#### Modifying Existing Products
+
+To modify a product, simply edit its properties in the `products` array:
+
+```typescript
+// Example: Update price and stock status
+{
+  id: 1,
+  name: "Wireless Bluetooth Headphones",
+  price: 69.99, // Changed from 79.99
+  // ... other properties
+  inStock: false // Changed from true
+}
+```
+
+#### Removing Products
+
+Remove a product by deleting its entire object from the `products` array. Make sure to maintain proper array syntax (commas between objects).
+
+#### Managing Categories
+
+Available categories are defined in the `categories` array at the bottom of `src/data/products.ts`:
+
+```typescript
+export const categories = [
+  "All",        // Don't remove - used for "show all" filter
+  "Electronics",
+  "Clothing",
+  "Food",
+  "Accessories",
+  "Sports",
+  "Home"
+];
+```
+
+To add a new category:
+1. Add the category name to the `categories` array
+2. Use the exact same spelling when assigning products to this category
+
+#### Image Guidelines
+
+- **Recommended size**: 500x500 pixels for optimal display
+- **Format**: JPEG or PNG
+- **Sources**: You can use Unsplash URLs (as in the examples) or your own hosted images
+- **Unsplash URL format**: `https://images.unsplash.com/photo-[ID]?w=500&h=500&fit=crop`
+
+#### Best Practices
+
+- **Unique IDs**: Always use unique, sequential ID numbers
+- **Consistent Categories**: Ensure category names exactly match those in the categories array
+- **Realistic Data**: Use reasonable ratings (1.0-5.0) and review counts
+- **Price Format**: Use decimal numbers (e.g., 29.99, not "29.99" or "$29.99")
+- **Descriptions**: Write clear, compelling product descriptions
+- **Stock Status**: Set `inStock: false` for products you want to show as unavailable
+
+#### Testing Your Changes
+
+After modifying products:
+1. Save the file
+2. The development server will automatically reload
+3. Check the products page to see your changes
+4. Verify filtering and search work correctly with new products/categories
 
 ### Styling
 The application uses Tailwind CSS. You can:
